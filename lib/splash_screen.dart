@@ -1,7 +1,32 @@
+import 'package:firebase_app/signup_page.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  int splashMin = 3;
+  @override
+  void initState() {
+    Future.delayed(
+      Duration(seconds: splashMin),
+      () async {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const SignUpPage();
+            },
+          ),
+        );
+      },
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
