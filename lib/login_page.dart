@@ -1,3 +1,4 @@
+import 'package:firebase_app/auth_controller.dart';
 import 'package:firebase_app/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -69,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   child: TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
                       prefixIcon: const Icon(
@@ -112,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   child: TextField(
+                    controller: passwordController,
                     decoration: InputDecoration(
                       hintText: 'Password',
                       prefixIcon: const Icon(
@@ -161,22 +166,27 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: h * 0.07,
           ),
-          Container(
-            width: w * 0.5,
-            height: h * 0.08,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              image: const DecorationImage(
-                  image: AssetImage('assets/images/loginbtn.png'),
-                  fit: BoxFit.cover),
-            ),
-            child: const Center(
-              child: Text(
-                'Sign in',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              AuthController.instance.login(emailController.text.trim(),passwordController.text.trim(),);
+            },
+            child: Container(
+              width: w * 0.5,
+              height: h * 0.08,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                image: const DecorationImage(
+                    image: AssetImage('assets/images/loginbtn.png'),
+                    fit: BoxFit.cover),
+              ),
+              child: const Center(
+                child: Text(
+                  'Sign in',
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

@@ -1,7 +1,9 @@
+import 'package:firebase_app/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({Key? key, required this.email}) : super(key: key);
+ final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'test12345@gmail.com',
+                 email,
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.grey[500],
@@ -73,22 +75,27 @@ class WelcomePage extends StatelessWidget {
           const SizedBox(
             height: 200,
           ),
-          Container(
-            width: w * 0.5,
-            height: h * 0.08,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              image: const DecorationImage(
-                  image: AssetImage('assets/images/loginbtn.png'),
-                  fit: BoxFit.cover),
-            ),
-            child: const Center(
-              child: Text(
-                'Sign Out',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              AuthController.instance.logOut();
+            },
+            child: Container(
+              width: w * 0.5,
+              height: h * 0.08,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                image: const DecorationImage(
+                    image: AssetImage('assets/images/loginbtn.png'),
+                    fit: BoxFit.cover),
+              ),
+              child: const Center(
+                child: Text(
+                  'Sign Out',
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
