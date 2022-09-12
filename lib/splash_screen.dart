@@ -1,4 +1,3 @@
-import 'package:firebase_app/signup_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,21 +8,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  int splashMin = 3;
+  int splashSec = 2000;
   @override
   void initState() {
     Future.delayed(
-      Duration(seconds: splashMin),
-      () async {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return const SignUpPage();
-            },
-          ),
-        );
-      },
+      Duration(seconds: splashSec),
     );
     super.initState();
   }
@@ -43,11 +32,13 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       width: double.maxFinite,
       height: double.maxFinite,
-      child: const Text(
-        'WeAuth!',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
+      child: const Center(
+        child: Text(
+          'We Auth',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 50,
+          ),
         ),
       ),
     );

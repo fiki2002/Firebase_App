@@ -2,6 +2,7 @@ import 'package:firebase_app/login_page.dart';
 import 'package:firebase_app/welcome_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -39,50 +40,82 @@ class AuthController extends GetxController {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
       Get.snackbar(
-        'About User',
-        'User message',
-        backgroundColor: Colors.redAccent,
+        'Error',
+        e.message!,
         snackPosition: SnackPosition.BOTTOM,
-        titleText: const Text(
-          'Account creation failed',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        messageText: Text(
-          e.toString(),
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        // 'User message',
+        // backgroundColor: Colors.redAccent,
+        // snackPosition: SnackPosition.BOTTOM,
+        // titleText: const Text(
+        //   'Account creation failed',
+        //   style: TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // ),
+        // messageText: Text(
+        //   e.toString(),
+        //   style: const TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // ),
       );
+    } catch (e) {
+      print(e.toString());
     }
   }
 
   void login(String email, String password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
       Get.snackbar(
-        'About Login',
-        'Login message',
-        backgroundColor: Colors.redAccent,
+        'Error',
+        e.message!,
         snackPosition: SnackPosition.BOTTOM,
-        titleText: const Text(
-          'Login Failed',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        messageText: Text(
-          e.toString(),
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        // 'User message',
+        // backgroundColor: Colors.redAccent,
+        // snackPosition: SnackPosition.BOTTOM,
+        // titleText: const Text(
+        //   'Account creation failed',
+        //   style: TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // ),
+        // messageText: Text(
+        //   e.toString(),
+        //   style: const TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // ),
       );
+    } on PlatformException catch (e) {
+      print(e.message);
+      Get.snackbar(
+        'Error',
+        e.message!,
+        snackPosition: SnackPosition.BOTTOM,
+        // 'User message',
+        // backgroundColor: Colors.redAccent,
+        // snackPosition: SnackPosition.BOTTOM,
+        // titleText: const Text(
+        //   'Account creation failed',
+        //   style: TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // ),
+        // messageText: Text(
+        //   e.toString(),
+        //   style: const TextStyle(
+        //     color: Colors.white,
+        //   ),
+        // ),
+      );
+    } catch (e) {
+      print(e.toString());
     }
   }
 
